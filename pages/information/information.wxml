@@ -1,5 +1,6 @@
 <!--pages/information/information.wxml-->
-<view  style="background-image: url(../../static/bg/flower.png); height: 100%">
+<!-- <view  style="background-image: url(../../static/bg/flower.png); height: 100%"> -->
+<view  style="height: 100%">
 <view class="title">个人档案信息</view>
 <view>
   <view class="page-section">

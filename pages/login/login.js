@@ -11,11 +11,18 @@ Page({
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
-    uid:''
+    uid:'',
+    carouselImgUrls: [
+      "../assets/carousel1.jpeg",
+      "../assets/carousel2.jpeg",
+      "../assets/carousel3.jpeg",
+      "../assets/carousel4.jpeg"
+    ],
   },
   
   start_dialog: function(){
     this.data.button_disabled=true
+    /* 先判断用户是否填写过个人信息，否则先提醒用户完善个人信息*/
     wx.navigateTo({
       url: '/pages/dialog/dialog'
     })
@@ -106,9 +113,9 @@ Page({
     that.setData({
       isHide: false
   });
-  wx.navigateTo({
-    url: '/pages/information/information'
-  })
+  // wx.navigateTo({
+  //   url: '/pages/user_inform/user_inform'
+  // })
     },
 
   /**

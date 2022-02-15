@@ -1,0 +1,23 @@
+{
+  "name": "depression_wechat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Depression-Consultation-Simulation/depression_wechat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Depression-Consultation-Simulation/depression_wechat/issues"
+  },
+  "homepage": "https://github.com/Depression-Consultation-Simulation/depression_wechat#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.10.2"
+  }
+}

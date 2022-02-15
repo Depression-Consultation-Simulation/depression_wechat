@@ -12,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "抑郁症AI问诊",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
@@ -26,17 +26,18 @@
     "position": "bottom",
     "list": [
       {
-        "selectedIconPath": "static/icon/homepage.png",  
-        "iconPath": "static/icon/homepage.png",  
+        "selectedIconPath": "static/icon/home_selected.png",  
+        "iconPath": "static/icon/home.png",  
         "pagePath": "pages/login/login", 
         "text": "首页" 
       },
       {
-        "selectedIconPath": "static/icon/mine.png",
-        "iconPath": "static/icon/mine.png",
+        "selectedIconPath": "static/icon/user_selected.png",
+        "iconPath": "static/icon/user.png",
         "pagePath": "pages/user_inform/user_inform",
         "text": "我的"
       }
     ]
   }
+
 }
