@@ -11,7 +11,9 @@ page{
   justify-content: center;
   display: flex;
   align-items: center;
-  background-color: darkseagreen;
+  /* background-color: d arkseagreen; */
+  background: linear-gradient(to bottom, #029ece, #17b4bd);
+
   flex-direction: column;
   padding-bottom: 10px; 
 }
@@ -95,6 +97,3 @@ page{
   margin-bottom: 10px;
 }
 
-.inputLabel{
-  color: darkgreen;
-}

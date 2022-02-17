@@ -6,9 +6,9 @@ Page({
    */
   data: {
     isInput:false,
-    gender:'男',
-    profession:'学生',
-    marriage: '未婚',
+    gender:'',
+    profession:'',
+    marriage: '',
     curr_date: '2022-1-1',
     birth:'2022-1-1',
     gender_arr:['男','女'],
@@ -76,10 +76,49 @@ Page({
     if( this.data.marriage==''){
       this.data.marriage='未婚'
     }
-    this.setData({
-      isInput: false
-    })
     //post信息至后台
+    var token;
+    var that = this;
+    wx.getStorage({
+      key: 'token',
+      success: function(res){
+        // success
+        token = res.data
+        if(that.data.birth!='2022-1-1'&&that.data.gender!=''&&that.data.marriage!=''&&that.data.profession!=''){
+          wx.request({
+            url: 'https://127.0.0.1:8089//WxService/users/editUserInfo',
+            header: {
+              'content-type': 'application/json',
+              'token': token,
+            },
+            data:{
+              "birth": that.data.birth,
+              "gender": that.data.gender,
+              "marriage": that.data.marriage,
+              "profession": that.data.profession
+            },
+            method:'POST',
+            success: res => {
+                console.log("userinfo" + res.data);
+                that.setData({
+                  isInput: false
+                })
+                if(res.data.data==null){
+                  wx.showToast({
+                    title: '请完善资料',
+                    icon: 'none'
+                  })
+                }
+            }
+          });
+        }else{
+          wx.showToast({
+            title: '资料未填写完整',
+            icon: 'error'
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -92,6 +131,39 @@ Page({
     this.setData({
       curr_date: date
     });
+    var token;
+    var that = this;
+    wx.getStorage({
+      key: 'token',
+      success: function(res){
+        // success
+        token = res.data
+        wx.request({
+          url: 'https://127.0.0.1:8089//WxService/users/getUserInfo',
+          header: {
+            'content-type': 'application/json',
+            'token': token,
+          },
+          method:'GET',
+          success: res => {
+              console.log("userinfo" + res.data);
+              if(res.data.data==null){
+                that.setData({
+                  isInput: true
+                })
+              }else{
+                that.setData({
+                  birth: res.data.data.birth,
+                  gender: res.data.data.gender,
+                  marriage: res.data.data.marriage,
+                  profession: res.data.data.profession
+                })
+              }
+          }
+        });
+      }
+    })
+
   },
 
   /**

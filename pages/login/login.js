@@ -21,11 +21,38 @@ Page({
   },
   
   start_dialog: function(){
-    this.data.button_disabled=true
+    this.data.button_disabled = true
     /* 先判断用户是否填写过个人信息，否则先提醒用户完善个人信息*/
-    wx.navigateTo({
-      url: '/pages/dialog/dialog'
+    var token;
+    wx.getStorage({
+      key: 'token',
+      success: function(res){
+        // success
+        token = res.data
+        wx.request({
+          url: 'https://127.0.0.1:8089//WxService/users/getUserInfo',
+          header: {
+            'content-type': 'application/json',
+            'token': token,
+          },
+          method:'GET',
+          success: res => {
+              console.log("userinfo" + res.data);
+              if(res.data.data==null){
+                wx.showToast({
+                  title: '请先完善资料',
+                  icon: 'none'
+                })
+              }else{
+                wx.navigateTo({
+                  url: '/pages/dialog/dialog'
+                })
+              }
+          }
+        });
+      }
     })
+  
   },
 
   bindKeyInput_name: function (e) {
@@ -48,7 +75,7 @@ Page({
     // 查看是否授权
     that.setData({
       isHide: true
-  });
+    });
     wx.getSetting({
         success: function(res) {
             if (res.authSetting['scope.userInfo']) {
@@ -65,28 +92,37 @@ Page({
                                 // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
                                 var obj = {};
                                 wx.request({
-                                  url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + 'wx2a07d41a6cf8517a' + '&secret=' + '55110e669089591cf3cd48cba081c0a5' + '&js_code=' + res.code + '&grant_type=authorization_code',
-                                  data: {},
-                                  method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-                                  // header: {}, // 设置请求的 header  
-                                  success: function (res) {
-                                    that.setData({
-                                      uid:res.data.openid,
-                                    })
-                                    obj.openid = res.data.openid;
-                                    obj.session_key = Date.now() + res.data.session_key;
-                                    console.log(that.data.uid);
-                                    ////////////////////////////////////////////////
-                                    wx.request({
-                                      url: 'http://127.0.0.1:5000/login',
-                                      data: {'uid':  res.data.openid},
-                                      method:'POST',
-                                      success: res => {
-                                          console.log("用户的openid:" + res.data.openid);
-                                      }
-                                  });
+                                  url: 'https://127.0.0.1:8089//WxService/users/login',
+                                  data: {'code':  res.code},
+                                  method:'POST',
+                                  success: res => {
+                                      wx.setStorageSync('token', res.data.data.token)
+                                      console.log("token: " + res.data.data.token);
                                   }
                                 });
+                                // wx.request({
+                                //   url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + 'wx2a07d41a6cf8517a' + '&secret=' + '55110e669089591cf3cd48cba081c0a5' + '&js_code=' + res.code + '&grant_type=authorization_code',
+                                //   data: {},
+                                //   method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+                                //   // header: {}, // 设置请求的 header  
+                                //   success: function (res) {
+                                //     that.setData({
+                                //       uid:res.data.openid,
+                                //     })
+                                //     obj.openid = res.data.openid;
+                                //     obj.session_key = Date.now() + res.data.session_key;
+                                //     console.log(that.data.uid);
+                                //     ////////////////////////////////////////////////
+                                //     wx.request({
+                                //       url: 'http://127.0.0.1:5000/login',
+                                //       data: {'uid':  res.data.openid},
+                                //       method:'POST',
+                                //       success: res => {
+                                //           console.log("用户的openid:" + res.data.openid);
+                                //       }
+                                //   });
+                                //   }
+                                // });
                             }
                         });
                     }
