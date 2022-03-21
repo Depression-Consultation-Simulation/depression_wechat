@@ -27,11 +27,11 @@
         </view> 
         <view class="line"></view>
         <view class="BtnView"> 
-          <button type="primary" bindtap="start_dialog"  disabled="{{button_disabled}}" class=".Btn" >贝克量表</button>
+          <button type="primary" bindtap="start_scale"  disabled="{{button_disabled}}" class=".Btn" >贝克量表</button>
         </view> 
         <view class="line"></view>
         <view class="BtnView"> 
-          <button type="primary" bindtap="start_dialog"  disabled="{{button_disabled}}" class=".Btn" >表情量表</button>
+          <button type="primary" bindtap="start_emoji"  disabled="{{button_disabled}}" class=".Btn" >表情量表</button>
         </view> 
       <!-- </view>   -->
     </view>

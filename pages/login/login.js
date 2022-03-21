@@ -30,7 +30,7 @@ Page({
         // success
         token = res.data
         wx.request({
-          url: 'https://127.0.0.1:8089//WxService/users/getUserInfo',
+          url: 'https://yyz.labdoc.cn:8089/WxService/users/getUserInfo',
           header: {
             'content-type': 'application/json',
             'token': token,
@@ -54,7 +54,17 @@ Page({
     })
   
   },
-
+  start_scale: function(){
+    wx.navigateTo({
+      url: '/pages/scale/scale'
+    })
+  },
+  start_emoji: function(){
+    wx.showToast({
+      title: '该量表尚未开放',
+      icon: 'none'
+    })
+  },
   bindKeyInput_name: function (e) {
     this.setData({
       input_name:e.detail.value,
@@ -92,7 +102,7 @@ Page({
                                 // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
                                 var obj = {};
                                 wx.request({
-                                  url: 'https://127.0.0.1:8089//WxService/users/login',
+                                  url: 'https://yyz.labdoc.cn:8089/WxService/users/login',
                                   data: {'code':  res.code},
                                   method:'POST',
                                   success: res => {
@@ -114,7 +124,7 @@ Page({
                                 //     console.log(that.data.uid);
                                 //     ////////////////////////////////////////////////
                                 //     wx.request({
-                                //       url: 'http://127.0.0.1:5000/login',
+                                //       url: 'http://yyz.labdoc.cn:5000/login',
                                 //       data: {'uid':  res.data.openid},
                                 //       method:'POST',
                                 //       success: res => {

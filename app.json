@@ -4,10 +4,10 @@
     "pages/dialog/dialog",
     "pages/user_inform/user_inform",
     "pages/information/information",
-    "pages/about_us/about_us",
     "pages/advice/advice",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/scale/scale"
   ],
   "window": {
     "backgroundTextStyle": "light",

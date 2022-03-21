@@ -86,7 +86,7 @@ Page({
         token = res.data
         if(that.data.birth!='2022-1-1'&&that.data.gender!=''&&that.data.marriage!=''&&that.data.profession!=''){
           wx.request({
-            url: 'https://127.0.0.1:8089//WxService/users/editUserInfo',
+            url: 'https://yyz.labdoc.cn:8089/WxService/users/editUserInfo',
             header: {
               'content-type': 'application/json',
               'token': token,
@@ -139,7 +139,7 @@ Page({
         // success
         token = res.data
         wx.request({
-          url: 'https://127.0.0.1:8089//WxService/users/getUserInfo',
+          url: 'https://yyz.labdoc.cn:8089/WxService/users/getUserInfo',
           header: {
             'content-type': 'application/json',
             'token': token,
